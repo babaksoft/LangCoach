@@ -5,6 +5,12 @@ namespace BabakSoft.LangCoach.Model
     public class Meaning
     {
         /// <summary>
+        /// Expected to always have value. However, because it models an indirect relationship,
+        /// might be null in special cases.
+        /// </summary>
+        public int? TopicId { get; set; }
+
+        /// <summary>
         /// Localized meaning in current language
         /// </summary>
         public string Value { get; set; }

@@ -4,9 +4,9 @@ A learning tool for practising languages
 # User stories
 Adding a quick set of user stories to shape an initial design
 
-## Story 1 : As a tool admin, I want to define topic-based words and phrases, so that a learner can improve his/her vocabulary for different topics
+## Story 1 : As a tool admin, I want to manage topic-based words and phrases, so that a learner can improve his/her vocabulary for different topics
 
-## Story 2 : As a tool admin, I want to define verb conjugation tables, so that a learner can practice correct usage of verbs
+## Story 2 : As a tool admin, I want to manage verb conjugation tables, so that a learner can practice correct usage of verbs
 
 ## Story 3 : As a learner, I want to review all words and phrases for a topic, so that I can better learn usage and meaning of words for that topic
 
@@ -14,7 +14,7 @@ Adding a quick set of user stories to shape an initial design
 
 ## Story 5 : As a learner, I want to start a quiz with flexible options, so that I can assess my reading and writing skill
 
-## Story 6 : As a tool admin, I want to define topic-based words in bulk mode by importing from a CSV, so that I can quickly augment progressive dictionary
+## Story 6 : As a tool admin, I want to define topic-based words and phrases in bulk mode by importing from a CSV, so that I can quickly augment progressive dictionary
 
 ## Story 7 : As a learner, I want to quickly lookup a specific verb conjugation, so that I can review and use correct forms in my writing or speaking activities
 
