@@ -3,155 +3,61 @@ using BabakSoft.Platform.Common;
 
 namespace BabakSoft.LangCoach.Persistence
 {
-    public class JsonRepository : ILanguageRepository
+    /// <summary>
+    /// Provides persistence operations required for manipulating language items
+    /// </summary>
+    /// <typeparam name="TItem">Type of language item in Json data storage</typeparam>
+    public class JsonRepository<TItem> : JsonRepositoryBase<TItem>
+        where TItem : class, ILanguageItem
     {
-        #region User Story #1
-
-        /// <inheritdoc/>
-        public void SaveWord(Word word)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonRepository{TItem}"/> class
+        /// </summary>
+        /// <param name="dataPath">Path of physical data file where items are persisted</param>
+        public JsonRepository(string dataPath)
+            : base(dataPath)
         {
-            throw ExceptionBuilder.NewNotImplementedException();
         }
 
-        /// <inheritdoc/>
-        public void SavePhrase(Phrase phrase)
+        /// <summary>
+        /// Reads and returns all items related to the given topic
+        /// </summary>
+        /// <param name="topicId">Unique identifier of the topic of interest</param>
+        /// <returns>Collection of all items related to the given topic</returns>
+        public List<TItem> GetItemsByTopic(int topicId)
         {
-            throw ExceptionBuilder.NewNotImplementedException();
+            var allItems = GetAllItems();
+            var byTopicIds = allItems
+                .SelectMany(item => item.Meanings)
+                .Where(meaning => meaning.TopicId.HasValue
+                    && meaning.TopicId.Value == topicId)
+                .Select(meaning => meaning.ParentId);
+            return allItems
+                .Where(item => byTopicIds.Contains(item.Id))
+                .ToList();
         }
 
-        /// <inheritdoc/>
-        public void DeleteWord(int wordId)
+        /// <summary>
+        /// Inserts a collection of language items into the underlying data storage
+        /// </summary>
+        /// <param name="items">Collection of items to insert</param>
+        public void SaveDataItems(IEnumerable<TItem> items)
         {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void DeletePhrase(int phraseId)
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        #endregion
-
-        #region User Story #2
-
-        /// <inheritdoc/>
-        public void SaveVerb(Verb verb)
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void DeleteVerb(int verbId)
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        #endregion
-
-        #region User Story #3
-
-        /// <inheritdoc/>
-        public List<Word> GetWordsByTopic(int topicId)
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public List<Phrase> GetPhrasesByTopic(int topicId)
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public List<Verb> GetVerbsByTopic(int topicId)
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        #endregion
-
-        #region User Story #4
-
-        /// <inheritdoc/>
-        public List<Note> GetAllNotes()
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void SaveNote(Note note)
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void DeleteNote(int noteId)
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        #endregion
-
-        #region User Story #6
-
-        /// <inheritdoc/>
-        public void SaveWords(IEnumerable<Word> words)
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void SavePhrases(IEnumerable<Phrase> phrases)
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        #endregion
-
-        #region User Story #7
-
-        /// <inheritdoc/>
-        public List<Verb> GetAllVerbs()
-        {
-            throw ExceptionBuilder.NewNotImplementedException();
-        }
-
-        #endregion
-
-        private static void EnsureDataFilesExist()
-        {
-            var dataPath = Path.Combine("..", "..", "..", "Data");
-            if (!Directory.Exists(dataPath))
+            Verify.ArgumentNotNull(items, nameof(items));
+            if (!items.Any())
             {
-                Directory.CreateDirectory(dataPath);
+                return;
             }
 
-            EnsureDataFileExists(dataPath, "words");
-            EnsureDataFileExists(dataPath, "phrases");
-            EnsureDataFileExists(dataPath, "verbs");
-            EnsureDataFileExists(dataPath, "notes");
-        }
-
-        private static void EnsureDataFileExists(string dataPath, string name)
-        {
-            var path = Path.Combine(dataPath, $"{name}.json");
-            if (!File.Exists(path))
+            var allItems = GetAllItems();
+            var idProvider = new IdentityProvider<TItem>(allItems);
+            foreach (var item in allItems)
             {
-                File.WriteAllText(path, "[]");
+                item.Id = idProvider.NextId();
             }
-        }
 
-        private static void EncodeNoteText(Note note)
-        {
-            note.Text = note.Text.Replace(Environment.NewLine, EncodedNewLine);
+            allItems.AddRange(items);
+            ApplyChanges(allItems);
         }
-
-        private static void DecodeNoteText(Note note)
-        {
-            note.Text = note.Text.Replace(EncodedNewLine, Environment.NewLine);
-        }
-
-        private const string EncodedNewLine = @"\r\n";
     }
 }

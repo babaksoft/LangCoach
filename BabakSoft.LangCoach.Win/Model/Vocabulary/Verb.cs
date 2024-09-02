@@ -2,13 +2,19 @@
 
 namespace BabakSoft.LangCoach.Model
 {
-    public class Verb
+    public class Verb : ILanguageItem
     {
         public Verb()
         {
             Meanings = new List<Meaning>();
         }
 
+        public static string DataPath
+        {
+            get { return Path.Combine("..", "..", "..", "Data", "verbs.json"); }
+        }
+
+        /// <inheritdoc/>
         public int Id { get; set; }
 
         /// <summary>
@@ -22,6 +28,7 @@ namespace BabakSoft.LangCoach.Model
         /// <remarks>This property may not apply to languages other than French.</remarks>
         public string EndForm { get; set; }
 
+        /// <inheritdoc/>
         public List<Meaning> Meanings { get; private set; }
     }
 }

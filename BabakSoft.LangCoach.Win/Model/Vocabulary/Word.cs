@@ -2,15 +2,22 @@
 
 namespace BabakSoft.LangCoach.Model
 {
-    public class Word
+    public class Word : ILanguageItem
     {
         public Word()
         {
             Meanings = new List<Meaning>();
         }
 
+        public static string DataPath
+        {
+            get { return Path.Combine("..", "..", "..", "Data", "words.json"); }
+        }
+
+        /// <inheritdoc/>
         public int Id { get; set; }
 
+        /// <inheritdoc/>
         public string Name { get; set; }
 
         /// <summary>
@@ -22,6 +29,7 @@ namespace BabakSoft.LangCoach.Model
         /// </remarks>
         public string Gender { get; set; }
 
+        /// <inheritdoc/>
         public List<Meaning> Meanings { get; private set; }
     }
 }
