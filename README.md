@@ -14,6 +14,12 @@ Adding a quick set of user stories to shape an initial design
 
 ## Story 5 : As a learner, I want to start a quiz with flexible options, so that I can assess my reading and writing skill
 
+## Story 6 : As a tool admin, I want to define topic-based words in bulk mode by importing from a CSV, so that I can quickly augment progressive dictionary
+
+## Story 7 : As a learner, I want to quickly lookup a specific verb conjugation, so that I can review and use correct forms in my writing or speaking activities
+
+## Story 8 : As a tool admin, I want to easily backup tool databases to a cloud provider, so that I can recover from possible data loss and/or corruption
+
 # Starting with one language (French)
 This learning tool initially supports only the French language. It can be later enhanced to support several languages.
 
