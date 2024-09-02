@@ -4,21 +4,29 @@ A learning tool for practising languages
 # User stories
 Adding a quick set of user stories to shape an initial design
 
-## Story 1 : As a tool admin, I want to manage topic-based words and phrases, so that a learner can improve his/her vocabulary for different topics
+## Story 1
+As a tool admin, I want to manage topic-based words and phrases, so that a learner can improve his/her vocabulary for different topics
 
-## Story 2 : As a tool admin, I want to manage verb conjugation tables, so that a learner can practice correct usage of verbs
+## Story 2
+As a tool admin, I want to manage verb conjugation tables, so that a learner can practice correct usage of verbs
 
-## Story 3 : As a learner, I want to review all words and phrases for a topic, so that I can better learn usage and meaning of words for that topic
+## Story 3
+As a learner, I want to review all words and phrases for a topic, so that I can better learn usage and meaning of words for that topic
 
-## Story 4 : As a learner, I want to manage (view, create, edit and delete) free notes, so that I can improve my writing skills and review my progress
+## Story 4
+As a learner, I want to manage (view, create, edit and delete) free notes, so that I can improve my writing skills and review my progress
 
-## Story 5 : As a learner, I want to start a quiz with flexible options, so that I can assess my reading and writing skill
+## Story 5
+As a learner, I want to start a quiz with flexible options, so that I can assess my reading and writing skill
 
-## Story 6 : As a tool admin, I want to define topic-based words and phrases in bulk mode by importing from a CSV, so that I can quickly augment progressive dictionary
+## Story 6
+As a tool admin, I want to define topic-based words and phrases in bulk mode by importing from a CSV, so that I can quickly augment progressive dictionary
 
-## Story 7 : As a learner, I want to quickly lookup a specific verb conjugation, so that I can review and use correct forms in my writing or speaking activities
+## Story 7
+As a learner, I want to quickly lookup a specific verb conjugation, so that I can review and use correct forms in my writing or speaking activities
 
-## Story 8 : As a tool admin, I want to easily backup tool databases to a cloud provider, so that I can recover from possible data loss and/or corruption
+## Story 8
+As a tool admin, I want to easily backup tool databases to a cloud provider, so that I can recover from possible data loss and/or corruption
 
 # Starting with one language (French)
 This learning tool initially supports only the French language. It can be later enhanced to support several languages.
