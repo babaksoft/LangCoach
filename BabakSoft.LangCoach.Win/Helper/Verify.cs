@@ -214,6 +214,15 @@ namespace BabakSoft.Platform.Common
                 throw (ExceptionBuilder.NewArgumentException());
         }
 
+        public static void FileExists(string path)
+        {
+            Verify.ArgumentNotNullOrWhitespace(path, nameof(path));
+            if (!File.Exists(path))
+            {
+                throw ExceptionBuilder.NewGenericException<FileNotFoundException>();
+            }
+        }
+
         private static void VerifyNotNullAndIsAssignable(IComparable leftValue, IComparable rightValue)
         {
             Verify.ArgumentNotNull(leftValue, "leftValue");
