@@ -17,10 +17,14 @@ namespace BabakSoft.LangCoach.Persistence
         /// Initializes a new instance of the <see cref="JsonRepositoryBase{TItem}"/> class
         /// </summary>
         /// <param name="dataPath">Path of physical data file where items are persisted</param>
-        public JsonRepositoryBase(string dataPath)
+        /// <param name="webSafe">
+        /// Indicates if special characters need to be escaped to improve Web security
+        /// </param>
+        public JsonRepositoryBase(string dataPath, bool webSafe = true)
         {
             Verify.ArgumentNotNullOrWhitespace(dataPath, nameof(dataPath));
             DataPath = dataPath;
+            WebSafe = webSafe;
         }
 
         /// <summary>
@@ -29,13 +33,19 @@ namespace BabakSoft.LangCoach.Persistence
         public string DataPath { get; }
 
         /// <summary>
+        /// Gets a value that indicates if special characters need to be escaped
+        /// to improve Web security
+        /// </summary>
+        public bool WebSafe { get; }
+
+        /// <summary>
         /// Reads and returns all existing items from data storage
         /// </summary>
         /// <returns>Collection of all existing items</returns>
         public List<TItem> GetAllItems()
         {
             return JsonHelper.To<List<TItem>>(
-                File.ReadAllText(DataPath, Encoding.UTF8));
+                File.ReadAllText(DataPath, Encoding.UTF8), WebSafe);
         }
 
         /// <summary>
@@ -90,7 +100,7 @@ namespace BabakSoft.LangCoach.Persistence
         public void ApplyChanges(List<TItem> items)
         {
             Verify.ArgumentNotNull(items, nameof(items));
-            File.WriteAllText(DataPath, JsonHelper.From(items), Encoding.UTF8);
+            File.WriteAllText(DataPath, JsonHelper.From(items, WebSafe), Encoding.UTF8);
         }
     }
 }

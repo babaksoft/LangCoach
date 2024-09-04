@@ -14,8 +14,11 @@ namespace BabakSoft.LangCoach.Persistence
         /// Initializes a new instance of the <see cref="JsonRepository{TItem}"/> class
         /// </summary>
         /// <param name="dataPath">Path of physical data file where items are persisted</param>
-        public JsonRepository(string dataPath)
-            : base(dataPath)
+        /// <param name="webSafe">
+        /// Indicates if special characters need to be escaped to improve Web security
+        /// </param>
+        public JsonRepository(string dataPath, bool webSafe = true)
+            : base(dataPath, webSafe)
         {
         }
 
@@ -51,7 +54,7 @@ namespace BabakSoft.LangCoach.Persistence
 
             var allItems = GetAllItems();
             var idProvider = new IdentityProvider<TItem>(allItems);
-            foreach (var item in allItems)
+            foreach (var item in items)
             {
                 item.Id = idProvider.NextId();
             }

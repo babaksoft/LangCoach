@@ -1,2 +1,9 @@
-Modeling French grammar and vocabulary, using my textbooks
+Quick start
 
+Choose a role : Admin, Learner
+
+Choose an activity :
+* Admin activities
+  ** Grammar (add verb conjugation), Vocabulary (add words and phrases), Vocabulary (bulk import words and phrases), Backup databases
+* Learner activities
+  ** Grammar (verb conjugation lookup), Vocabulary (word and phrase review), Start a quiz (vocab-only, grammar-only, vocab and grammar, specific topic, random topic, multi-topic), Manage notes

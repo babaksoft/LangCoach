@@ -8,10 +8,10 @@ namespace BabakSoft.LangCoach.Persistence
         public LanguageRepository()
         {
             EnsureDataFilesExist();
-            _wordRepo = new JsonRepository<Word>(Word.DataPath);
-            _phraseRepo = new JsonRepository<Phrase>(Phrase.DataPath);
-            _verbRepo = new JsonRepository<Verb>(Verb.DataPath);
-            _noteRepo = new JsonRepositoryBase<Note>(Note.DataPath);
+            _wordRepo = new JsonRepository<Word>(Word.DataPath, false);
+            _phraseRepo = new JsonRepository<Phrase>(Phrase.DataPath, false);
+            _verbRepo = new JsonRepository<Verb>(Verb.DataPath, false);
+            _noteRepo = new JsonRepositoryBase<Note>(Note.DataPath, false);
         }
 
         #region User Story #1
