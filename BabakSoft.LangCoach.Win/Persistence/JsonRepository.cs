@@ -39,28 +39,5 @@ namespace BabakSoft.LangCoach.Persistence
                 .Where(item => byTopicIds.Contains(item.Id))
                 .ToList();
         }
-
-        /// <summary>
-        /// Inserts a collection of language items into the underlying data storage
-        /// </summary>
-        /// <param name="items">Collection of items to insert</param>
-        public void SaveDataItems(IEnumerable<TItem> items)
-        {
-            Verify.ArgumentNotNull(items, nameof(items));
-            if (!items.Any())
-            {
-                return;
-            }
-
-            var allItems = GetAllItems();
-            var idProvider = new IdentityProvider<TItem>(allItems);
-            foreach (var item in items)
-            {
-                item.Id = idProvider.NextId();
-            }
-
-            allItems.AddRange(items);
-            ApplyChanges(allItems);
-        }
     }
 }

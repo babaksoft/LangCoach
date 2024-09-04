@@ -51,6 +51,12 @@ namespace BabakSoft.LangCoach.Persistence
         #region User Story #3
 
         /// <summary>
+        /// Reads and returns a collection of all existing topics
+        /// </summary>
+        /// <returns>Collection of all topics</returns>
+        List<Topic> GetAllTopics();
+
+        /// <summary>
         /// Reads all words related to given topic
         /// </summary>
         /// <param name="topicId">Unique identifier of the topic of interest</param>
@@ -98,6 +104,12 @@ namespace BabakSoft.LangCoach.Persistence
         #region User Story #6
 
         /// <summary>
+        /// Saves several topics in progressive dictionary (bulk mode)
+        /// </summary>
+        /// <param name="topics">Collection of topics to save</param>
+        void SaveTopics(IEnumerable<Topic> topics);
+
+        /// <summary>
         /// Saves several words in progressive dictionary (bulk mode)
         /// </summary>
         /// <param name="words">Collection of words to save</param>
@@ -108,6 +120,12 @@ namespace BabakSoft.LangCoach.Persistence
         /// </summary>
         /// <param name="phrases">Collection of phrases to save</param>
         void SavePhrases(IEnumerable<Phrase> phrases);
+
+        /// <summary>
+        /// Saves several verbs in progressive dictionary (bulk mode)
+        /// </summary>
+        /// <param name="verbs">Collection of verbs to save</param>
+        void SaveVerbs(IEnumerable<Verb> verbs);
 
         #endregion
 

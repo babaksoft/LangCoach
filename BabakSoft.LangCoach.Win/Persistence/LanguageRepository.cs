@@ -8,6 +8,7 @@ namespace BabakSoft.LangCoach.Persistence
         public LanguageRepository()
         {
             EnsureDataFilesExist();
+            _topicRepo = new JsonRepositoryBase<Topic>(Topic.DataPath, false);
             _wordRepo = new JsonRepository<Word>(Word.DataPath, false);
             _phraseRepo = new JsonRepository<Phrase>(Phrase.DataPath, false);
             _verbRepo = new JsonRepository<Verb>(Verb.DataPath, false);
@@ -61,6 +62,12 @@ namespace BabakSoft.LangCoach.Persistence
         #region User Story #3
 
         /// <inheritdoc/>
+        public List<Topic> GetAllTopics()
+        {
+            return _topicRepo.GetAllItems();
+        }
+
+        /// <inheritdoc/>
         public List<Word> GetWordsByTopic(int topicId)
         {
             return _wordRepo.GetItemsByTopic(topicId);
@@ -109,6 +116,12 @@ namespace BabakSoft.LangCoach.Persistence
         #region User Story #6
 
         /// <inheritdoc/>
+        public void SaveTopics(IEnumerable<Topic> topics)
+        {
+            _topicRepo.SaveDataItems(topics);
+        }
+
+        /// <inheritdoc/>
         public void SaveWords(IEnumerable<Word> words)
         {
             _wordRepo.SaveDataItems(words);
@@ -118,6 +131,12 @@ namespace BabakSoft.LangCoach.Persistence
         public void SavePhrases(IEnumerable<Phrase> phrases)
         {
             _phraseRepo.SaveDataItems(phrases);
+        }
+
+        /// <inheritdoc/>
+        public void SaveVerbs(IEnumerable<Verb> verbs)
+        {
+            _verbRepo.SaveDataItems(verbs);
         }
 
         #endregion
@@ -140,6 +159,7 @@ namespace BabakSoft.LangCoach.Persistence
                 Directory.CreateDirectory(dataPath);
             }
 
+            EnsureDataFileExists(dataPath, "topics");
             EnsureDataFileExists(dataPath, "words");
             EnsureDataFileExists(dataPath, "phrases");
             EnsureDataFileExists(dataPath, "verbs");
@@ -168,6 +188,7 @@ namespace BabakSoft.LangCoach.Persistence
         }
 
         private const string EncodedNewLine = @"\r\n";
+        private readonly JsonRepositoryBase<Topic> _topicRepo;
         private readonly JsonRepository<Word> _wordRepo;
         private readonly JsonRepository<Phrase> _phraseRepo;
         private readonly JsonRepository<Verb> _verbRepo;

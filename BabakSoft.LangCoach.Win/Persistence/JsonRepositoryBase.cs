@@ -77,6 +77,29 @@ namespace BabakSoft.LangCoach.Persistence
         }
 
         /// <summary>
+        /// Inserts a collection of items into the underlying data storage
+        /// </summary>
+        /// <param name="items">Collection of items to insert</param>
+        public void SaveDataItems(IEnumerable<TItem> items)
+        {
+            Verify.ArgumentNotNull(items, nameof(items));
+            if (!items.Any())
+            {
+                return;
+            }
+
+            var allItems = GetAllItems();
+            var idProvider = new IdentityProvider<TItem>(allItems);
+            foreach (var item in items)
+            {
+                item.Id = idProvider.NextId();
+            }
+
+            allItems.AddRange(items);
+            ApplyChanges(allItems);
+        }
+
+        /// <summary>
         /// Deletes a single item from data storage
         /// </summary>
         /// <param name="itemId">Unique identifier of the item to be deleted</param>
